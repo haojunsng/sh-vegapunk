@@ -40,4 +40,4 @@ jobs:
 
     - name: Deploy to S3
       run: |
-        aws s3 cp bots/strong_right/lambda_function.zip s3://data-robot/lambda/strong-right/lambda_function.zip
+        aws s3 cp bots/strong_right/lambda_function.zip s3://data-robot-franky/lambda/strong-right/lambda_function.zip

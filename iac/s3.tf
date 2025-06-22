@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "data_robot_bucket" {
-  bucket        = "data-robot"
+  bucket        = "data-robot-franky"
   force_destroy = true
 }
 
