@@ -28,7 +28,7 @@ jobs:
       run: |
         mkdir -p lambda_package
         pip install requests -t lambda_package
-        cp -r ./* lambda_package/
+        cp strong_right_bot.py lambda_package/
         cd lambda_package
         zip -r ../lambda_function.zip .
 
