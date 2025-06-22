@@ -17,12 +17,13 @@ Right now, `data_robot` is docked with only one working arm (Telegram bot).
 
 The current setup follows a **serverless-first** approach with infrastructure defined as code:
 
-| Component        | Tech Stack           | Description                              |
-|------------------|----------------------|------------------------------------------|
-| Bot logic        | Python 3.13          | Telegram API interaction and poll logic  |
-| Serverless infra | AWS Lambda           | Function triggered on a schedule         |
-| Config management| Lambda Env Vars      | Chat ID & token securely injected        |
-| Deployment       | Terraform            | Infrastructure as Code (IaC)             |
-| CI/CD Pipeline   | GitHub Actions       | Automated deployment via OIDC auth to S3 |
+| Component          | Tech Stack           | Description                              |
+|--------------------|----------------------|------------------------------------------|
+| Bot logic          | Python 3.13          | Telegram API interaction and poll logic  |
+| Compute            | AWS Lambda           | Serverless compute (.zip archive)        |
+| Scheduling         | AWS EventBridge      | Function triggered on a schedule         |
+| Config management  | Lambda Env Vars      | Chat ID & token securely injected        |
+| Deployment         | Terraform            | Infrastructure as Code (IaC)             |
+| CI/CD Pipeline     | GitHub Actions       | Automated deployment via OIDC auth to S3 |
 
 ---
