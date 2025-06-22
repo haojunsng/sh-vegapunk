@@ -23,5 +23,6 @@ The current setup follows a **serverless-first** approach with infrastructure de
 | Serverless infra | AWS Lambda           | Function triggered on a schedule         |
 | Config management| Lambda Env Vars      | Chat ID & token securely injected        |
 | Deployment       | Terraform            | Infrastructure as Code (IaC)             |
+| CI/CD Pipeline   | GitHub Actions       | Automated deployment via OIDC auth to S3 |
 
 ---
