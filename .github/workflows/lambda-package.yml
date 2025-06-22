@@ -24,7 +24,7 @@ jobs:
         python-version: '3.13.4'
 
     - name: Create Lambda package
-      working-directory: ./firestore-to-s3
+      working-directory: ./bots/strong_right
       run: |
         mkdir -p lambda_package
         pip install requests -t lambda_package
