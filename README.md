@@ -3,7 +3,7 @@
 
 `data_robot` is modeled after **Franky** from the Straw Hat Pirates. While Franky builds ships, this one builds bots — starting with Telegram automation.
 
-Right now, `data_robot` is docked with only one working arm (Telegram bot).
+Right now, `data_robot` is docked with two working arms (Telegram bot):
 
 ---
 
@@ -12,7 +12,8 @@ Right now, `data_robot` is docked with only one working arm (Telegram bot).
 ### ✅ Telegram Poll Dispatcher  
 `strong_right` launches a **weekly poll every Sunday night** in a Telegram group to collect running attendance availability for the upcoming week. 
 
-`weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
+### ✅ Bill Splitter (weapons_left)
+`weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals. Now fully deployed, it uses a **Telegram webhook** integrated with **API Gateway** and **AWS Lambda** to process and calculate bill splits in real time.
 
 ---
 ## 🛠️ Architecture & Deployment Stack
@@ -21,9 +22,10 @@ The current setup follows a **serverless-first** approach with infrastructure de
 
 | Component          | Tech Stack           | Description                              |
 |--------------------|----------------------|------------------------------------------|
-| Bot logic          | Python 3.13          | Telegram API interaction and poll logic  |
+| Bot logic          | Python 3.13          | Telegram API interaction and poll/bill logic  |
 | Compute            | AWS Lambda           | Serverless compute (.zip archive)        |
-| Scheduling         | AWS EventBridge      | Function triggered on a schedule         |
+| Scheduling         | AWS EventBridge      | Function triggered on a schedule (polls) |
+| Webhook Endpoint   | API Gateway          | Receives Telegram webhook for bill split |
 | Config management  | Lambda Env Vars      | Chat ID & token securely injected        |
 | Deployment         | Terraform            | Infrastructure as Code (IaC)             |
 | CI/CD Pipeline     | GitHub Actions       | Automated deployment via OIDC auth to S3 |
