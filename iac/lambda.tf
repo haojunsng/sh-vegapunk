@@ -1,3 +1,4 @@
+# strongRight bot
 # Get current account ID
 data "aws_caller_identity" "current" {}
 
@@ -36,7 +37,10 @@ resource "aws_iam_role_policy" "strongRight_lambda_policy" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
-        Resource = "arn:aws:logs:ap-southeast-1:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/strongRight:*"
+        Resource = [
+          "arn:aws:logs:ap-southeast-1:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/strongRight:*",
+          "arn:aws:logs:ap-southeast-1:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/weaponsLeft:*"
+        ]
       }
     ]
   })
@@ -84,4 +88,22 @@ resource "aws_cloudwatch_event_target" "lambda_target" {
   rule      = aws_cloudwatch_event_rule.weekly_schedule.name
   target_id = "tsrc-poll-lambda"
   arn       = aws_lambda_function.tsrc_poll_bot.arn
+}
+
+# weaponsLeft bot
+resource "aws_lambda_function" "weaponsLeft" {
+  function_name = "weaponsLeft"
+  role          = aws_iam_role.strongRight_lambda_role.arn
+  handler       = "weapons_left_bot.lambda_handler"
+  runtime       = "python3.13"
+  timeout       = 30
+
+  s3_bucket = aws_s3_bucket.data_robot_bucket.bucket
+  s3_key    = "lambda/weapons-left/lambda_function.zip"
+
+  environment {
+    variables = {
+      WEAPONS_LEFT_BOT_TOKEN = var.weapons_left_bot_token
+    }
+  }
 }
