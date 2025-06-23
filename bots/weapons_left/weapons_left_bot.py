@@ -1,9 +1,5 @@
-import os
 from helper import parse_webhook, send_telegram_message, create_response
 from telegram_helper import handle_telegram_message
-
-BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 def lambda_handler(event, context):
 
