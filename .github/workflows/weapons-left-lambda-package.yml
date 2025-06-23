@@ -28,7 +28,7 @@ jobs:
       run: |
         mkdir -p lambda_package
         pip install requests -t lambda_package
-        cp weapons_left_bot.py lambda_package/
+        cp helper.py split_bill.py telegram_helper.py weapons_left_bot.py lambda_package/
         cd lambda_package
         zip -r ../lambda_function.zip .
 
