@@ -9,11 +9,11 @@ Right now, `data_robot` is docked with two working arms (Telegram bot):
 
 ## 🚀 Current Abilities
 
-### ✅ Telegram Poll Dispatcher  
+### ✅ STRONG-RIGHT! (Telegram Poll Dispatcher)
 `strong_right` launches a **weekly poll every Sunday night** in a Telegram group to collect running attendance availability for the upcoming week. 
 
-### ✅ Bill Splitter (weapons_left)
-`weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals. Now fully deployed, it uses a **Telegram webhook** integrated with **API Gateway** and **AWS Lambda** to process and calculate bill splits in real time.
+### ✅ WEAPONS-LEFT! (Bill Splitter)
+`weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
 ---
 ## 🛠️ Architecture & Deployment Stack
