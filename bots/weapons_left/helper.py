@@ -2,7 +2,7 @@ import json
 import requests
 import os
 
-WEAPONS_LEFT_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+WEAPONS_LEFT_BOT_TOKEN = os.environ.get('WEAPONS_LEFT_BOT_TOKEN')
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{WEAPONS_LEFT_BOT_TOKEN}"
 
 
