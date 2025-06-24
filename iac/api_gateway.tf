@@ -70,7 +70,7 @@ resource "aws_lambda_permission" "allow_http_api_gateway" {
 # CloudWatch log group for API Gateway logs
 resource "aws_cloudwatch_log_group" "api_gw_logs" {
   name              = "/aws/apigateway/weaponsLeft-http"
-  retention_in_days = 7
+  retention_in_days = 1
 }
 
 # IAM role for API Gateway CloudWatch logging (if needed for HTTP API)
