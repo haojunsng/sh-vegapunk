@@ -25,7 +25,7 @@ The current setup follows a **serverless-first** approach with infrastructure de
 | Bot logic          | Python 3.13          | Telegram API interaction and poll/bill logic  |
 | Compute            | AWS Lambda           | Serverless compute (.zip archive)        |
 | Scheduling         | AWS EventBridge      | Function triggered on a schedule (polls) |
-| Webhook Endpoint   | API Gateway          | Receives Telegram webhook for bill split |
+| Webhook Endpoint   | HTTP API Gateway     | Receives Telegram webhook for bill split |
 | Config management  | Lambda Env Vars      | Chat ID & token securely injected        |
 | Deployment         | Terraform            | Infrastructure as Code (IaC)             |
 | CI/CD Pipeline     | GitHub Actions       | Automated deployment via OIDC auth to S3 |
