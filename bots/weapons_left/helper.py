@@ -101,6 +101,8 @@ def send_telegram_message(chat_id, text):
         response = requests.post(url, json=payload, timeout=10)
         response.raise_for_status()
         print(f"Message sent successfully to chat {chat_id}")
+        print(f"Text: {text}")
+
     except requests.RequestException as e:
         print(f"Error sending message: {str(e)}")
         raise
