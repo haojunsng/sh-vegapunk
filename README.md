@@ -31,7 +31,8 @@ TG -->|Poll Results| USERS[Group Members];
 ---
 
 ### ✅ WEAPONS-LEFT! (Bill Splitter)
-<img width="419" alt="image" src="https://github.com/user-attachments/assets/4a6210c3-46ac-4c46-a387-1e163cadbe01" />
+![image](https://github.com/user-attachments/assets/99fc00cc-ea3a-4d3d-903d-e9b906be3044)
+
 
 `weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
