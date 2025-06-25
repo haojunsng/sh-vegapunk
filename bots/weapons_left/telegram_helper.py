@@ -16,30 +16,42 @@ def handle_telegram_message(message_text):
 
 
 def format_split_result(result):
-
     total = result['total']
     per_person = result['per_person']
     settlements = result['settlements']
+    balances = result['balances']
     
-    response = f"**Bill Split Results**\n"
-    response += f"Total: ${total:.2f}\n"
-    response += f"Per person: ${per_person:.2f}\n\n"
+    response = "💰 **BILL SPLIT RESULTS** 💰\n\n"
     
-    response += "**Individual Status:**\n"
-    for person, balance in result['balances'].items():
+    # Summary section
+    response += "📊 **SUMMARY**\n"
+    response += f"┌ Total Bill: ${total:.2f}\n"
+    response += f"├ Split Between: {len(balances)} people\n"
+    response += f"└ Each Person Pays: ${per_person:.2f}\n\n"
+    
+    # Individual breakdown with emojis
+    response += "👥 **INDIVIDUAL BREAKDOWN**\n"
+    for person, balance in balances.items():
         if balance > 0.01:
-            response += f"- {person}: should receive ${balance:.2f}\n"
+            response += f"✅ {person}: +${balance:.2f}\n"
         elif balance < -0.01:
-            response += f"- {person}: owes ${-balance:.2f}\n"
+            response += f"❌ {person}: -${-balance:.2f}\n"
         else:
-            response += f"- {person}: even\n"
+            response += f"⚖️ {person}: $0.00 (all settled)\n"
     
-    # Settlement instructions
+    # Settlement instructions with better formatting
     if settlements:
-        response += "\n**Who pays whom:**\n"
-        for settlement in settlements:
-            response += f"• {settlement['from']} pays {settlement['to']} ${settlement['amount']:.2f}\n"
-    else:
-        response += "\nEveryone is already even!"
+        response += f"\n🔄 **SETTLEMENT PLAN** ({len(settlements)} transactions)\n"
+        
+        for i, settlement in enumerate(settlements, 1):
+            response += f"{i}. 💸 **{settlement['from']}** → **{settlement['to']}**: ${settlement['amount']:.2f}\n"
+        
+        else:
+            response += f"🎉 **EVERYONE IS ALREADY EVEN!**\n"
+            response += f"No money needs to change hands. Perfect split! 🎊\n"
+    
+    # Add a fun footer
+    response += f"\n---\n"
+    response += f"🤖 Powered by Franky, Weapons-Left Bot | Split completed in {len(balances)} people"
     
     return response
