@@ -1,7 +1,4 @@
 # strongRight bot
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Lambda role
 resource "aws_iam_role" "strongRight_lambda_role" {
   name = "strongRight-role"
