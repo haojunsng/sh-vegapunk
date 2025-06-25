@@ -1,9 +1,9 @@
 # 🤖⚙️ `data_robot`
 *"SUPER!!!"*
 
-`data_robot` is modeled after **Franky** from the Straw Hat Pirates. While Franky builds ships, this one builds bots — starting with Telegram automation.
+`data_robot` is modeled after **Franky** from the Straw Hat Pirates. While Franky builds ships, this one builds bots.
 
-Right now, `data_robot` is docked with two working arms (Telegram bot):
+Right now, `data_robot` is docked with two working arms:
 
 ---
 
