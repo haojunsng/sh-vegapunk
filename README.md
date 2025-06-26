@@ -1,4 +1,4 @@
-# 🤖⚙️ `data_robot`
+![image](https://github.com/user-attachments/assets/eda7d07e-ba5c-4fff-be2b-a9d1e2e4b909)![image](https://github.com/user-attachments/assets/eda7d07e-ba5c-4fff-be2b-a9d1e2e4b909)![image](https://github.com/user-attachments/assets/ed582de0-75ab-4a36-be46-1309e7feb678)![image](https://github.com/user-attachments/assets/ed582de0-75ab-4a36-be46-1309e7feb678)# 🤖⚙️ `data_robot`
 *"SUPER!!!"*
 
 `data_robot` is modeled after **Franky** from the Straw Hat Pirates. While Franky builds ships, this one builds bots.
@@ -31,8 +31,8 @@ TG -->|Poll Results| USERS[Group Members];
 ---
 
 ### ✅ WEAPONS-LEFT! (Bill Splitter)
-![image](https://github.com/user-attachments/assets/99fc00cc-ea3a-4d3d-903d-e9b906be3044)
-
+![image](https://github.com/user-attachments/assets/207cb0d5-ec81-410a-b974-f6fd1341f949)
+![image](https://github.com/user-attachments/assets/64859a6b-c37f-484c-95b5-b4c5bf3f630c)
 
 `weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
