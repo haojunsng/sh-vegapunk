@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/eda7d07e-ba5c-4fff-be2b-a9d1e2e4b909)![image](https://github.com/user-attachments/assets/eda7d07e-ba5c-4fff-be2b-a9d1e2e4b909)![image](https://github.com/user-attachments/assets/ed582de0-75ab-4a36-be46-1309e7feb678)![image](https://github.com/user-attachments/assets/ed582de0-75ab-4a36-be46-1309e7feb678)# 🤖⚙️ `data_robot`
+# 🤖⚙️ `data_robot`
 *"SUPER!!!"*
 
 `data_robot` is modeled after **Franky** from the Straw Hat Pirates. While Franky builds ships, this one builds bots.
