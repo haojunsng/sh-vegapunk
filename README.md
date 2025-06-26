@@ -11,7 +11,7 @@ Right now, `sh-vegapunk` is docked with two satellites:
 
 ### ✅ SHAKA! (Telegram Poll Dispatcher)
 <div align="center">
-  <img width="370" alt="image" src="https://github.com/user-attachments/assets/0ea2cdff-19a1-46a6-8295-dc1f06583cf0" />
+  <img width="370" alt="image" src="https://github.com/user-attachments/assets/afdce1b3-cdf6-4f93-91e2-efe61d851870" />
 </div>
 
 `SHAKA` launches a **weekly poll every Sunday night** in a Telegram group to collect running attendance availability for the upcoming week. 
@@ -34,8 +34,8 @@ graph TD
 
 ### ✅ LILITH! (Bill Splitter)
 <div align="center">
-  <img width="419" alt="Weapons-Left Bot Example 1" src="https://github.com/user-attachments/assets/207cb0d5-ec81-410a-b974-f6fd1341f949" />
-  <img width="419" alt="Weapons-Left Bot Example 2" src="https://github.com/user-attachments/assets/64859a6b-c37f-484c-95b5-b4c5bf3f630c" />
+  <img width="419" alt="Lilith1" src="https://github.com/user-attachments/assets/d297e487-d909-43de-86ec-71cb334cacaf" />
+  <img width="419" alt="Lilith2" src="https://github.com/user-attachments/assets/3e0802eb-9f83-472f-9f0d-6666671181f3" />
 </div>
 
 `LILITH` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
