@@ -6,11 +6,7 @@
 
 `sh-vegapunk` is modeled after **Vegapunk** from the One Piece.
 
-Right now, `sh-vegapunk` is docked with two satellites:
-
----
-
-## 🚀 Current Abilities
+## 🚀 Satellites Available
 
 ### ✅ SHAKA! (Telegram Poll Dispatcher)
 <div align="center">
