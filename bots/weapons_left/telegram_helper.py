@@ -30,7 +30,7 @@ Usopp 20
 • Shows optimal settlement plan
 • Handles any number of people
 
-🚀 **Ready to split?** Just send me `/split` followed by your expenses!""" 🚀
+🚀 **Ready to split?** Just send me `/split` followed by your expenses! 🚀""" 
 
 def handle_telegram_message(message_text):
 
