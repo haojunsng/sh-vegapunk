@@ -55,6 +55,8 @@ resource "aws_lambda_function" "tsrc_poll_bot" {
 
   role = aws_iam_role.strongRight_lambda_role.arn
 
+  source_code_hash = data.aws_s3_object.strong_right_zip.etag
+
   environment {
     variables = {
       BOT_TOKEN       = var.bot_token
@@ -97,6 +99,8 @@ resource "aws_lambda_function" "weaponsLeft" {
 
   s3_bucket = aws_s3_bucket.data_robot_bucket.bucket
   s3_key    = "lambda/weapons-left/lambda_function.zip"
+
+  source_code_hash = data.aws_s3_object.weapons_left_zip.etag
 
   environment {
     variables = {
