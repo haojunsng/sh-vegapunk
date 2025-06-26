@@ -10,7 +10,9 @@ Right now, `data_robot` is docked with two working arms:
 ## 🚀 Current Abilities
 
 ### ✅ STRONG-RIGHT! (Telegram Poll Dispatcher)
-<img width="370" alt="image" src="https://github.com/user-attachments/assets/0ea2cdff-19a1-46a6-8295-dc1f06583cf0" />
+<div align="center">
+  <img width="370" alt="image" src="https://github.com/user-attachments/assets/0ea2cdff-19a1-46a6-8295-dc1f06583cf0" />
+</div>
 
 `strong_right` launches a **weekly poll every Sunday night** in a Telegram group to collect running attendance availability for the upcoming week. 
 
