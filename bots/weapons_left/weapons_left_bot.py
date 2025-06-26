@@ -1,5 +1,5 @@
 from helper import parse_webhook, send_telegram_message, create_response
-from telegram_helper import handle_telegram_message
+from telegram_helper import handle_telegram_message, get_welcome_message
 
 def lambda_handler(event, context):
 
@@ -16,7 +16,7 @@ def lambda_handler(event, context):
         if message_text.startswith('/split'):
             bot_response = handle_telegram_message(message_text)
         else:
-            bot_response = "Hi! Send me /split followed by expenses to split a bill.\n\nExample:\n/split\nLuffy 50\nZoro 30\nNami 0"
+            bot_response = get_welcome_message()
         
         # Send response back to Telegram
         send_telegram_message(chat_id, bot_response)
