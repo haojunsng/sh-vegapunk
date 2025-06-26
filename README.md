@@ -1,25 +1,25 @@
-# 🤖⚙️ `data_robot`
+# 🤖⚙️ `sh-vegapunk`
 *"SUPER!!!"*
 
-`data_robot` is modeled after **Franky** from the Straw Hat Pirates. While Franky builds ships, this one builds bots.
+`sh-vegapunk` is modeled after **Vegapunk** from the One Piece.
 
-Right now, `data_robot` is docked with two working arms:
+Right now, `sh-vegapunk` is docked with two satellites:
 
 ---
 
 ## 🚀 Current Abilities
 
-### ✅ STRONG-RIGHT! (Telegram Poll Dispatcher)
+### ✅ SHAKA! (Telegram Poll Dispatcher)
 <div align="center">
   <img width="370" alt="image" src="https://github.com/user-attachments/assets/0ea2cdff-19a1-46a6-8295-dc1f06583cf0" />
 </div>
 
-`strong_right` launches a **weekly poll every Sunday night** in a Telegram group to collect running attendance availability for the upcoming week. 
+`SHAKA` launches a **weekly poll every Sunday night** in a Telegram group to collect running attendance availability for the upcoming week. 
 
 #### Architecture
 ```mermaid
 graph TD
-    EB[AWS EventBridge Scheduler] -->|Weekly Trigger| LAMBDA[AWS Lambda strong_right]
+    EB[AWS EventBridge Scheduler] -->|Weekly Trigger| LAMBDA[AWS Lambda SHAKA]
     LAMBDA -->|Send Poll| TG[Telegram API]
     TG -->|Poll Results| USERS[Group Members]
 ```
@@ -32,20 +32,20 @@ graph TD
 
 ---
 
-### ✅ WEAPONS-LEFT! (Bill Splitter)
+### ✅ LILITH! (Bill Splitter)
 <div align="center">
   <img width="419" alt="Weapons-Left Bot Example 1" src="https://github.com/user-attachments/assets/207cb0d5-ec81-410a-b974-f6fd1341f949" />
   <img width="419" alt="Weapons-Left Bot Example 2" src="https://github.com/user-attachments/assets/64859a6b-c37f-484c-95b5-b4c5bf3f630c" />
 </div>
 
-`weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
+`LILITH` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
 #### Architecture
 ```mermaid
 graph TD
     TG[Telegram Bot] -->|Webhook POST| CF[Cloudflare Worker Reverse Proxy]
     CF -->|Verified & Forwarded| API[AWS API Gateway REST, IP Whitelisted]
-    API --> LAMBDA[AWS Lambda weapons_left]
+    API --> LAMBDA[AWS Lambda LILITH]
     LAMBDA -->|Response| TG
 ```
 
