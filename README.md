@@ -33,8 +33,10 @@ TG -->|Poll Results| USERS[Group Members];
 ---
 
 ### ✅ WEAPONS-LEFT! (Bill Splitter)
-![image](https://github.com/user-attachments/assets/207cb0d5-ec81-410a-b974-f6fd1341f949)
-![image](https://github.com/user-attachments/assets/64859a6b-c37f-484c-95b5-b4c5bf3f630c)
+<div align="center">
+  <img width="419" alt="Weapons-Left Bot Example 1" src="https://github.com/user-attachments/assets/207cb0d5-ec81-410a-b974-f6fd1341f949" />
+  <img width="419" alt="Weapons-Left Bot Example 2" src="https://github.com/user-attachments/assets/64859a6b-c37f-484c-95b5-b4c5bf3f630c" />
+</div>
 
 `weapons_left` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
