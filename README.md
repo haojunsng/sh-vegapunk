@@ -1,5 +1,8 @@
 # 🤖⚙️ `sh-vegapunk`
-*"SUPER!!!"*
+
+<div align="center">
+  <img width="370" alt="image" src="https://github.com/user-attachments/assets/3c547c52-70fa-4a8f-81b6-fcf703c7ce93" />
+</div>
 
 `sh-vegapunk` is modeled after **Vegapunk** from the One Piece.
 
