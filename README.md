@@ -18,10 +18,10 @@ Right now, `data_robot` is docked with two working arms:
 
 #### Architecture
 ```mermaid
-graph TD;
-EB[AWS EventBridge Scheduler] -->|Weekly Trigger| LAMBDA[AWS Lambda strong_right];
-LAMBDA -->|Send Poll| TG[Telegram API];
-TG -->|Poll Results| USERS[Group Members];
+graph TD
+    EB[AWS EventBridge Scheduler] -->|Weekly Trigger| LAMBDA[AWS Lambda strong_right]
+    LAMBDA -->|Send Poll| TG[Telegram API]
+    TG -->|Poll Results| USERS[Group Members]
 ```
 
 
