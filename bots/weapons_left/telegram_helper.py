@@ -3,11 +3,11 @@ from split_bill import calculate_bill_split
 
 def get_welcome_message():
     """Returns the welcome message for new users"""
-    return """🤖 **Welcome to Weapons-Left Bot!** 💰
+    return """🤖 **Hello! I am Lilith, one of Vegapunk's satellites!** 💰
 
 I'm here to help you split bills with your crew! Here's how to use me:
 
-📝 **COMMAND FORMAT:**
+📝 **COMMAND FORMAT:** 📝
 ```
 /split
 [Name] [Amount Paid]
@@ -15,7 +15,7 @@ I'm here to help you split bills with your crew! Here's how to use me:
 ...
 ```
 
-🍖 **EXAMPLE:**
+🍖 **EXAMPLE:** 🍖
 ```
 /split
 Luffy 50
@@ -24,13 +24,13 @@ Nami 0
 Usopp 20
 ```
 
-✨ **FEATURES:**
+✨ **FEATURES:** ✨
 • Automatically calculates who owes what
 • Minimizes the number of transactions needed
 • Shows optimal settlement plan
 • Handles any number of people
 
-🚀 **Ready to split?** Just send me `/split` followed by your expenses!"""
+🚀 **Ready to split?** Just send me `/split` followed by your expenses! 🚀""" 
 
 def handle_telegram_message(message_text):
 
@@ -55,7 +55,7 @@ def format_split_result(result):
     response = "💰 **BILL SPLIT RESULTS** 💰\n\n"
     
     # Summary section
-    response += "📊 **SUMMARY**\n"
+    response += "📊 **SUMMARY** 📊\n"
     response += f"┌ Total Bill: ${total:.2f}\n"
     response += f"├ Split Between: {len(balances)} people\n"
     response += f"└ Each Person Pays: ${per_person:.2f}\n\n"
@@ -72,16 +72,16 @@ def format_split_result(result):
     
     # Settlement instructions with better formatting
     if settlements:
-        response += f"\n🔄 **SETTLEMENT PLAN** ({len(settlements)} transactions)\n"
+        response += f"\n🔄 **SETTLEMENT PLAN** ({len(settlements)} transactions) 🔄\n"
         
         for i, settlement in enumerate(settlements, 1):
-            response += f"{i}. 💸 **{settlement['from']}** → **{settlement['to']}**: ${settlement['amount']:.2f}\n"
+            response += f"{i}. 💸 **{settlement['from']}** → **{settlement['to']}**: ${settlement['amount']:.2f} 💸\n"
         
     else:
-        response += f"🎉 **EVERYONE IS ALREADY EVEN!**\n"
+        response += f"🎉 **EVERYONE IS ALREADY EVEN!** 🎉\n"
 
     # Add a fun footer
     response += f"\n---\n"
-    response += f"🤖 Powered by Franky, Weapons-Left Bot"
+    response += f"🤖 Powered by Lilith 🤖"
     
     return response
