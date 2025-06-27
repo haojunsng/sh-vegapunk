@@ -60,17 +60,17 @@ def calculate_settlements(balances):
     return settlements
 
 def calculate_split2(data, gst_rate=0.09, service_charge_rate=0.10, no_surcharges=False):
-
+    # All names in data are already lowercased by the parser
     payer = data['payer']
     sharing_items = data['sharing_items']
-    individual_expenses = data['individual_expenses']
+    individual_expenses = {k.lower(): v for k, v in data['individual_expenses'].items()}
     
     # Get all participants (excluding payer)
     all_participants = set(individual_expenses)
     for item in sharing_items:
         if item['participants'] == ['all']:
             continue
-        all_participants.update(item['participants'])
+        all_participants.update([p.lower() for p in item['participants']])
     all_participants.discard(payer)
     
     if not all_participants:
@@ -93,6 +93,7 @@ def calculate_split2(data, gst_rate=0.09, service_charge_rate=0.10, no_surcharge
             # Specific people share
             share_per_person = amount / len(participants)
             for participant in participants:
+                participant = participant.lower()
                 if participant not in sharing_breakdown:
                     sharing_breakdown[participant] = 0
                 sharing_breakdown[participant] += share_per_person
@@ -100,12 +101,15 @@ def calculate_split2(data, gst_rate=0.09, service_charge_rate=0.10, no_surcharge
     # Calculate what each person owes
     breakdown = {}
     for name in all_participants:
+        name = name.lower()
         individual_share = individual_expenses.get(name, 0)
         sharing_share = sharing_breakdown.get(name, 0)
         subtotal_share = individual_share + sharing_share
         
         if no_surcharges:
             total_share = subtotal_share
+            service_charge_share = 0
+            gst_share = 0
         else:
             # Calculate surcharges: Service Charge first, then GST on subtotal + service charge
             service_charge_share = subtotal_share * service_charge_rate
@@ -116,8 +120,8 @@ def calculate_split2(data, gst_rate=0.09, service_charge_rate=0.10, no_surcharge
             'individual': individual_share,
             'sharing': sharing_share,
             'subtotal': subtotal_share,
-            'gst': gst_share if not no_surcharges else 0,
-            'service_charge': service_charge_share if not no_surcharges else 0,
+            'gst': gst_share,
+            'service_charge': service_charge_share,
             'total': total_share
         }
     

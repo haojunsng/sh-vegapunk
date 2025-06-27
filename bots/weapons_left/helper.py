@@ -139,7 +139,7 @@ def parse_split2_input(text):
     payer_line = lines[0].split()
     if len(payer_line) < 2:
         raise ValueError("Payer line must be: 'payer-name'.")
-    payer = payer_line[1]
+    payer = payer_line[1].lower()
     
     sharing_items = []
     individual_expenses = {}
@@ -180,7 +180,7 @@ def parse_split2_input(text):
                 if amount_index == 2:
                     raise ValueError(f"No amount found in share line: {line}.")
                 
-                participants = parts[1:amount_index]
+                participants = [p.lower() for p in parts[1:amount_index]]
                 try:
                     amount = sum(float(part) for part in parts[amount_index:])
                 except ValueError:
@@ -193,7 +193,7 @@ def parse_split2_input(text):
             
         else:
             # Individual expense line
-            name = parts[0]
+            name = parts[0].lower()
             expenses = sum(float(part) for part in parts[1:])
             if name in individual_expenses:
                 individual_expenses[name] += expenses
