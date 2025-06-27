@@ -3,13 +3,14 @@ from split_bill import calculate_bill_split, calculate_split2
 
 def get_welcome_message():
     """Returns the welcome message for new users"""
-    return """🤖 **Hello! I am Lilith, one of Vegapunk's satellites!** 💰
+    return """🤖 *Hello! I am Lilith, one of Vegapunk's satellites!* 💰
 
 I'm here to help you split bills with your crew! Here's how to use me:
 
-🍖 **EXAMPLES:** 🍖
-**BASIC SPLIT**
-- Best for when you're just splitting the bill equally with people who paid different amounts - Chomp Chomp/Newton Circus/Bedok85.
+🍖 *EXAMPLES:* 🍖
+
+_Equal Split_
+- Best for when you're just splitting the bill equally with people who paid different amounts - Chomp Chomp / Newton Circus / Bedok85.
 ```
 /split
 Luffy 50
@@ -18,29 +19,30 @@ Nami 0
 Usopp 20
 ```
 
-**ADVANCED SPLIT**
-- Best for when one person paid for the whole bill, and you want to split the bill with the others - Restaurants/Bars/Clubs.
+_Advanced Split_
+- Best for when one person paid for the whole bill, and you want to split the bill with the others - Restaurants / Bars / Clubs.
 - Supports shared items and individual expenses.
 - Add "no surcharges" at the end if expenses are already nett.
 ```
 /split2
-payer haojun
+payer Luffy
 sharing all 25 15 10
-sharing amos apple 30
-sharing haojun apple 20
-amos 23 1.9
-apple 20 5.8 1.9
+sharing Zoro Nami 30
+sharing Nami Usopp 20
+Zoro 23 1.9
+Name 20 5.8 1.9
+Usopp 10
 no surcharges
 ```
 
-✨ **FEATURES:** ✨
-• Automatically calculates who owes what
+✨ _FEATURES:_ ✨\n
+• Automatically calculates who owes what.
 • Minimizes the number of transactions needed
 • Handles any number of people
 • GST + Service Charge calculations (Singapore)
 
 
-🚀 **Ready to split?** Just send me `/split` or `/split2` followed by your expenses! 🚀"""
+🚀 *Ready to split?* Just send me `/split` or `/split2` followed by your expenses!"""
 
 def handle_telegram_message(message_text):
     
@@ -81,16 +83,16 @@ def format_split_result(result):
     settlements = result['settlements']
     balances = result['balances']
     
-    response = "💰 **BILL SPLIT RESULTS** 💰\n\n"
+    response = "💰 *BILL SPLIT RESULTS* 💰\n\n"
     
     # Summary section
-    response += "📊 **SUMMARY** 📊\n"
+    response += "📊 *SUMMARY* 📊\n"
     response += f"┌ Total Bill: ${total:.2f}\n"
     response += f"├ Split Between: {len(balances)} people\n"
     response += f"└ Each Person Pays: ${per_person:.2f}\n\n"
     
     # Individual breakdown with emojis
-    response += "👥 **INDIVIDUAL BREAKDOWN** 👥\n"
+    response += "👥 *INDIVIDUAL BREAKDOWN* 👥\n"
     for person, balance in balances.items():
         if balance > 0.01:
             response += f"✅ {person} - gets back ${balance:.2f}.\n"
@@ -101,13 +103,13 @@ def format_split_result(result):
     
     # Settlement instructions with better formatting
     if settlements:
-        response += f"\n🔄 **SETTLEMENT PLAN** ({len(settlements)} transactions) 🔄\n"
+        response += f"\n🔄 *SETTLEMENT PLAN* ({len(settlements)} transactions) 🔄\n"
         
         for i, settlement in enumerate(settlements, 1):
-            response += f"{i}. 💸 **{settlement['from']}** → **{settlement['to']}**: ${settlement['amount']:.2f} 💸\n"
+            response += f"{i}. 💸 *{settlement['from']}* → *{settlement['to']}*: ${settlement['amount']:.2f} 💸\n"
         
     else:
-        response += f"🎉 **EVERYONE IS ALREADY EVEN!** 🎉\n"
+        response += f"🎉 *EVERYONE IS ALREADY EVEN!* 🎉\n"
 
     # Add a fun footer
     response += f"\n---\n"
