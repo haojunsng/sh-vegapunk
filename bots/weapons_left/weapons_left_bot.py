@@ -7,13 +7,13 @@ def lambda_handler(event, context):
         # Parse the webhook payload
         webhook_data = parse_webhook(event)
         if not webhook_data:
-            return create_response(200, "OK")  # Ignore non-message updates
+            return create_response(200, "OK")
         
         chat_id = webhook_data['chat_id']
         message_text = webhook_data['message_text']
         
         # Process the message with our bot logic
-        if message_text.startswith('/split'):
+        if message_text.startswith('/split') or message_text.startswith('/split2'):
             bot_response = handle_telegram_message(message_text)
         else:
             bot_response = get_welcome_message()

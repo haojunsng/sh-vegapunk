@@ -58,3 +58,73 @@ def calculate_settlements(balances):
             debtors[0] = (debtor_name, new_debt)
     
     return settlements
+
+def calculate_split2(data, gst_rate=0.09, service_charge_rate=0.10, no_surcharges=False):
+
+    payer = data['payer']
+    sharing_items = data['sharing_items']
+    individual_expenses = data['individual_expenses']
+    
+    # Get all participants (excluding payer)
+    all_participants = set(individual_expenses)
+    for item in sharing_items:
+        if item['participants'] == ['all']:
+            continue
+        all_participants.update(item['participants'])
+    all_participants.discard(payer)
+    
+    if not all_participants:
+        raise ValueError("No participants found")
+    
+    # Calculate sharing per person for each item
+    sharing_breakdown = {}
+    for item in sharing_items:
+        participants = item['participants']
+        amount = item['amount']
+        
+        if participants == ['all']:
+            # Everyone shares equally - including payer that's why +1
+            share_per_person = amount / (len(all_participants) + 1)
+            for participant in all_participants:
+                if participant not in sharing_breakdown:
+                    sharing_breakdown[participant] = 0
+                sharing_breakdown[participant] += share_per_person
+        else:
+            # Specific people share
+            share_per_person = amount / len(participants)
+            for participant in participants:
+                if participant not in sharing_breakdown:
+                    sharing_breakdown[participant] = 0
+                sharing_breakdown[participant] += share_per_person
+    
+    # Calculate what each person owes
+    breakdown = {}
+    for name in all_participants:
+        individual_share = individual_expenses.get(name, 0)
+        sharing_share = sharing_breakdown.get(name, 0)
+        subtotal_share = individual_share + sharing_share
+        
+        if no_surcharges:
+            total_share = subtotal_share
+        else:
+            # Calculate surcharges: Service Charge first, then GST on subtotal + service charge
+            service_charge_share = subtotal_share * service_charge_rate
+            gst_share = (subtotal_share + service_charge_share) * gst_rate
+            total_share = subtotal_share + service_charge_share + gst_share
+        
+        breakdown[name] = {
+            'individual': individual_share,
+            'sharing': sharing_share,
+            'subtotal': subtotal_share,
+            'gst': gst_share if not no_surcharges else 0,
+            'service_charge': service_charge_share if not no_surcharges else 0,
+            'total': total_share
+        }
+    
+    return {
+        'payer': payer,
+        'sharing_items': sharing_items,
+        'individual_expenses': individual_expenses,
+        'breakdown': breakdown,
+        'no_surcharges': no_surcharges
+    }
