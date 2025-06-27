@@ -20,15 +20,14 @@ Usopp 20
 ```
 
 _Advanced Split_
-- Best for when one person paid for the whole bill, and you want to split the bill with the others - Restaurants / Bars / Clubs.
-- Supports shared items and individual expenses.
+- Best when your party had individual expenses and shared expenses.
 - Add "no surcharges" at the end if expenses are already nett.
 ```
 /split2
 payer Luffy
-sharing all 25 15 10
-sharing Zoro Nami 30
-sharing Nami Usopp 20
+share all 25 15 10
+share Zoro Nami 30
+share Nami Usopp 20
 Zoro 23 1.9
 Name 20 5.8 1.9
 Usopp 10
@@ -91,6 +90,17 @@ def format_split_result(result):
     response += f"├ Split Between: {len(balances)} people\n"
     response += f"└ Each Person Pays: ${per_person:.2f}\n\n"
     
+    # Quick settlement summary
+    if settlements:
+        response += "🔄 *SETTLEMENT PLAN* ({len(settlements)} transactions) 🔄\n"
+        for i, settlement in enumerate(settlements, 1):
+            response += f"{i}. 💸 *{settlement['from']}* → *{settlement['to']}*: ${settlement['amount']:.2f} 💸\n"
+    else:
+        response += "🎉 *EVERYONE IS ALREADY EVEN!* 🎉\n"
+    
+    response += "\n📋 *DETAILED BREAKDOWN* (tap to expand)\n"
+    response += "> "
+    
     # Individual breakdown with emojis
     response += "👥 *INDIVIDUAL BREAKDOWN* 👥\n"
     for person, balance in balances.items():
@@ -101,16 +111,6 @@ def format_split_result(result):
         else:
             response += f"⚖️ {person} is even.\n"
     
-    # Settlement instructions with better formatting
-    if settlements:
-        response += f"\n🔄 *SETTLEMENT PLAN* ({len(settlements)} transactions) 🔄\n"
-        
-        for i, settlement in enumerate(settlements, 1):
-            response += f"{i}. 💸 *{settlement['from']}* → *{settlement['to']}*: ${settlement['amount']:.2f} 💸\n"
-        
-    else:
-        response += f"🎉 *EVERYONE IS ALREADY EVEN!* 🎉\n"
-
     # Add a fun footer
     response += f"\n---\n"
     response += f"🤖 Powered by Lilith 🤖"
@@ -130,6 +130,14 @@ def format_split2_result(result):
     response = ""
     response += "💰 *Advanced Bill Split Results* 💰\n\n"
     response += f"💳 *Paid by:* {payer} 💳\n\n"
+
+    # Quick summary of what each person owes
+    response += "💸 *QUICK SUMMARY* 💸\n"
+    for name, details in breakdown.items():
+        response += f"• *{name}* owes *${details['total']:.2f}* to {payer}\n"
+    
+    response += "\n📋 *DETAILED BREAKDOWN* (tap to expand)\n"
+    response += "> "
 
     # Sharing items
     if sharing_items:
@@ -167,6 +175,7 @@ def format_split2_result(result):
 
         response += f"{name} owes ${details['total']:.2f} to {payer}. \n"
 
-    response += "\n---"
-    response += "\n🤖 Powered by Lilith 🤖"
+    response += "\n---\n"
+    response += f"🤖 Powered by Lilith 🤖"
+    
     return response
