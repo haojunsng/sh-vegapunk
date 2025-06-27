@@ -124,9 +124,9 @@ def parse_split2_input(text):
     """
     Parse /split2 input in format:
     payer haojun
-    sharing all 25
-    sharing amos apple 15
-    sharing haojun apple 10
+    share all 25
+    share amos apple 15
+    share haojun apple 10
     amos 23 1.9
     apple 20 5.8 1.9
     """
@@ -152,24 +152,24 @@ def parse_split2_input(text):
         if not parts:
             continue
             
-        # Check if this is a sharing line
-        if parts[0].lower() == 'sharing':
+        # Check if this is a share line
+        if parts[0].lower() == 'share':
             if len(parts) < 3:
-                raise ValueError(f"Invalid sharing line: {line}.")
+                raise ValueError(f"Invalid share line: {line}.")
             
             # Parse sharing participants and amount
             if parts[1].lower() == 'all':
-                # sharing all amount1 amount2 amount3...
+                # share all amount1 amount2 amount3...
                 if len(parts) < 3:
-                    raise ValueError(f"Invalid 'sharing all' line: {line}.")
+                    raise ValueError(f"Invalid 'share all' line: {line}.")
                 participants = ['all']
                 # Sum all amounts after 'all'
                 total_amount = sum(float(part.replace(',', '')) for part in parts[2:])
                 amount = total_amount
             else:
                 if len(parts) < 4:
-                    raise ValueError(f"Invalid sharing line: {line}.")
-                # sharing person1 person2 ... amount
+                    raise ValueError(f"Invalid share line: {line}.")
+                # share person1 person2 ... amount
                 # Find the first number (amount)
                 amount_index = 2
                 for i in range(len(parts)):
@@ -178,13 +178,13 @@ def parse_split2_input(text):
                         break
 
                 if amount_index == 2:
-                    raise ValueError(f"No amount found in sharing line: {line}.")
+                    raise ValueError(f"No amount found in share line: {line}.")
                 
                 participants = parts[1:amount_index]
                 try:
                     amount = sum(float(part) for part in parts[amount_index:])
                 except ValueError:
-                    raise ValueError(f"Invalid amount in sharing item: {line}.")
+                    raise ValueError(f"Invalid amount in share item: {line}.")
             
             sharing_items.append({
                 'participants': participants,

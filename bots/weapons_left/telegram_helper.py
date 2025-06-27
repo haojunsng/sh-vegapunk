@@ -25,9 +25,9 @@ _Advanced Split_
 ```
 /split2
 payer Luffy
-sharing all 25 15 10
-sharing Zoro Nami 30
-sharing Nami Usopp 20
+share all 25 15 10
+share Zoro Nami 30
+share Nami Usopp 20
 Zoro 23 1.9
 Name 20 5.8 1.9
 Usopp 10
