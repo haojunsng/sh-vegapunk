@@ -99,7 +99,7 @@ def format_split_result(result):
         response += "🎉 *EVERYONE IS ALREADY EVEN!* 🎉\n"
     
     response += "\n📋 *DETAILED BREAKDOWN* (tap to expand)\n"
-    response += "> "
+    response += "<blockquote expandable>"
     
     # Individual breakdown with emojis
     response += "👥 *INDIVIDUAL BREAKDOWN* 👥\n"
@@ -114,6 +114,7 @@ def format_split_result(result):
     # Add a fun footer
     response += f"\n---\n"
     response += f"🤖 Powered by Lilith 🤖"
+    response += "</blockquote>"
     
     return response
 
@@ -137,7 +138,7 @@ def format_split2_result(result):
         response += f"• *{name}* owes *${details['total']:.2f}* to {payer}\n"
     
     response += "\n📋 *DETAILED BREAKDOWN* (tap to expand)\n"
-    response += "> "
+    response += "<blockquote expandable>"
 
     # Sharing items
     if sharing_items:
@@ -177,5 +178,6 @@ def format_split2_result(result):
 
     response += "\n---\n"
     response += f"🤖 Powered by Lilith 🤖"
+    response += "</blockquote>"
     
     return response
