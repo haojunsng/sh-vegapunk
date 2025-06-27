@@ -31,11 +31,10 @@
 ---
 
 ### ✅ LILITH! (Bill Splitter)
-<div align="center" style="display: flex; justify-content: center; gap: 10px;">
-  <img src="https://github.com/user-attachments/assets/d297e487-d909-43de-86ec-71cb334cacaf" alt="Lilith1" style="width: 30%; height: auto;" />
-  <img src="https://github.com/user-attachments/assets/3e0802eb-9f83-472f-9f0d-6666671181f3" alt="Lilith2" style="width: 30%; height: auto;" />
-</div>
 
+<div align="center">
+  <img width="60%" alt="Telegram Bot Demo" src="media/demo-lilith.gif" />
+</div>
 
 `LILITH` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
