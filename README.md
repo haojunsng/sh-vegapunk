@@ -32,7 +32,9 @@
 
 ### ✅ LILITH! (Bill Splitter)
 
-![Telegram Bot Demo](media/telegram-demo.gif)
+<div align="center">
+  <img width="60%" alt="Telegram Bot Demo" src="media/demo-lilith.gif" />
+</div>
 
 `LILITH` helps groups to split bills with ease. **Simply input who paid what, and it will automatically calculate how much everyone owes - and who needs to pay whom to settle up.** Perfect for shared meals.
 
