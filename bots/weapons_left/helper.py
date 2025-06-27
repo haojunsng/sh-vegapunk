@@ -1,5 +1,5 @@
 import json
-import requests
+# import requests
 import os
 
 WEAPONS_LEFT_BOT_TOKEN = os.environ.get('WEAPONS_LEFT_BOT_TOKEN')

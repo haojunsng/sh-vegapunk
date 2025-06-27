@@ -51,7 +51,7 @@ def handle_telegram_message(message_text):
         try:
             # Check for no surcharges flag
             no_surcharges = 'no surcharges' in message_text.lower()
-            clean_text = message_text.replace('no surcharges', '').strip()
+            clean_text = message_text.replace('/split2', '').replace('no surcharges', '').strip()
             
             data = parse_split2_input(clean_text)
             result = calculate_split2(data, no_surcharges=no_surcharges)
