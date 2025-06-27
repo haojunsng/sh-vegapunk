@@ -119,3 +119,89 @@ def create_response(status_code, body):
         },
         'body': json.dumps({'message': body})
     }
+
+def parse_split2_input(text):
+    """
+    Parse /split2 input in format:
+    payer haojun
+    sharing all 25
+    sharing amos apple 15
+    sharing haojun apple 10
+    amos 23 1.9
+    apple 20 5.8 1.9
+    """
+    lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
+    
+    if len(lines) < 2:
+        raise ValueError("Need at least payer and one expense line.")
+    
+    # Parse payer (first line)
+    payer_line = lines[0].split()
+    if len(payer_line) < 2:
+        raise ValueError("Payer line must be: 'payer-name'.")
+    payer = payer_line[1]
+    
+    sharing_items = []
+    individual_expenses = {}
+    
+    # Process remaining lines
+    for line in lines[1:]:
+        parts = line.split()
+
+        # In case someone sends a blank line
+        if not parts:
+            continue
+            
+        # Check if this is a sharing line
+        if parts[0].lower() == 'sharing':
+            if len(parts) < 3:
+                raise ValueError(f"Invalid sharing line: {line}.")
+            
+            # Parse sharing participants and amount
+            if parts[1].lower() == 'all':
+                # sharing all amount1 amount2 amount3...
+                if len(parts) < 3:
+                    raise ValueError(f"Invalid 'sharing all' line: {line}.")
+                participants = ['all']
+                # Sum all amounts after 'all'
+                total_amount = sum(float(part.replace(',', '')) for part in parts[2:])
+                amount = total_amount
+            else:
+                if len(parts) < 4:
+                    raise ValueError(f"Invalid sharing line: {line}.")
+                # sharing person1 person2 ... amount
+                # Find the first number (amount)
+                amount_index = 2
+                for i in range(len(parts)):
+                    if str(parts[i]).replace('.', '').isdigit():
+                        amount_index = i
+                        break
+
+                if amount_index == 2:
+                    raise ValueError(f"No amount found in sharing line: {line}.")
+                
+                participants = parts[1:amount_index]
+                try:
+                    amount = sum(float(part) for part in parts[amount_index:])
+                except ValueError:
+                    raise ValueError(f"Invalid amount in sharing item: {line}.")
+            
+            sharing_items.append({
+                'participants': participants,
+                'amount': amount
+            })
+            
+        else:
+            # Individual expense line
+            name = parts[0]
+            expenses = sum(float(part) for part in parts[1:])
+            if name in individual_expenses:
+                individual_expenses[name] += expenses
+            else:
+                individual_expenses[name] = expenses
+    
+    return {
+        'payer': payer,
+        'sharing_items': sharing_items,
+        'individual_expenses': individual_expenses
+    }

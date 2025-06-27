@@ -1,5 +1,5 @@
-from helper import parse_split_message
-from split_bill import calculate_bill_split
+from helper import parse_split_message, parse_split2_input
+from split_bill import calculate_bill_split, calculate_split2
 
 def get_welcome_message():
     """Returns the welcome message for new users"""
@@ -7,15 +7,9 @@ def get_welcome_message():
 
 I'm here to help you split bills with your crew! Here's how to use me:
 
-📝 **COMMAND FORMAT:** 📝
-```
-/split
-[Name] [Amount Paid]
-[Name] [Amount Paid]
-...
-```
-
-🍖 **EXAMPLE:** 🍖
+🍖 **EXAMPLES:** 🍖
+**BASIC SPLIT**
+- Best for when you're just splitting the bill equally with people who paid different amounts - Chomp Chomp/Newton Circus/Bedok85.
 ```
 /split
 Luffy 50
@@ -24,26 +18,61 @@ Nami 0
 Usopp 20
 ```
 
+**ADVANCED SPLIT**
+- Best for when one person paid for the whole bill, and you want to split the bill with the others - Restaurants/Bars/Clubs.
+- Supports shared items and individual expenses.
+- Add "no surcharges" at the end if expenses are already nett.
+```
+/split2
+payer haojun
+sharing all 25 15 10
+sharing amos apple 30
+sharing haojun apple 20
+amos 23 1.9
+apple 20 5.8 1.9
+no surcharges
+```
+
 ✨ **FEATURES:** ✨
 • Automatically calculates who owes what
 • Minimizes the number of transactions needed
-• Shows optimal settlement plan
 • Handles any number of people
+• GST + Service Charge calculations (Singapore)
 
-🚀 **Ready to split?** Just send me `/split` followed by your expenses! 🚀""" 
+
+🚀 **Ready to split?** Just send me `/split` or `/split2` followed by your expenses! 🚀"""
 
 def handle_telegram_message(message_text):
-
-    expenses = parse_split_message(message_text)
     
-    if 'error' in expenses:
-        return f"{expenses['error']}\n\nFormat:\n/split\nLuffy 50\nZoro 30\nNami 0"
-    
-
-    result = calculate_bill_split(expenses)
-    
-    response = format_split_result(result)
-    return response
+    if message_text.startswith('/split2'):
+        # Handle advanced split
+        try:
+            # Check for no surcharges flag
+            no_surcharges = 'no surcharges' in message_text.lower()
+            clean_text = message_text.replace('no surcharges', '').strip()
+            
+            data = parse_split2_input(clean_text)
+            result = calculate_split2(data, no_surcharges=no_surcharges)
+            response = format_split2_result(result)
+            return response
+            
+        except ValueError as e:
+            return f"❌ Error: {str(e)}\n\nPlease refer to the examples above for the correct format."
+        except Exception as e:
+            return f"❌ Unexpected error: {str(e)}\n\nPlease check your input format."
+    else:
+        
+        # Handle regular split
+        try:
+            expenses = parse_split_message(message_text)
+        except ValueError as e:
+            return f"❌ Error: {str(e)}\n\nPlease refer to the examples above for the correct format."
+        except Exception as e:
+            return f"❌ Unexpected error: {str(e)}\n\nPlease check your input format."
+        
+        result = calculate_bill_split(expenses)
+        response = format_split_result(result)
+        return response
 
 
 def format_split_result(result):
@@ -61,14 +90,14 @@ def format_split_result(result):
     response += f"└ Each Person Pays: ${per_person:.2f}\n\n"
     
     # Individual breakdown with emojis
-    response += "👥 **INDIVIDUAL BREAKDOWN**\n"
+    response += "👥 **INDIVIDUAL BREAKDOWN** 👥\n"
     for person, balance in balances.items():
         if balance > 0.01:
-            response += f"✅ {person}: +${balance:.2f}\n"
+            response += f"✅ {person} - gets back ${balance:.2f}.\n"
         elif balance < -0.01:
-            response += f"❌ {person}: -${-balance:.2f}\n"
+            response += f"❌ {person} - needs to pay ${-balance:.2f}.\n"
         else:
-            response += f"⚖️ {person}: $0.00 (all settled)\n"
+            response += f"⚖️ {person} is even.\n"
     
     # Settlement instructions with better formatting
     if settlements:
@@ -84,4 +113,58 @@ def format_split_result(result):
     response += f"\n---\n"
     response += f"🤖 Powered by Lilith 🤖"
     
+    return response
+
+def format_split2_result(result):
+    """
+    Format the split2 calculation result for display.
+    """
+    payer = result['payer']
+    sharing_items = result['sharing_items']
+    individual_expenses = result['individual_expenses']
+    breakdown = result['breakdown']
+    no_surcharges = result['no_surcharges']
+
+    response = ""
+    response += "💰 *Advanced Bill Split Results* 💰\n\n"
+    response += f"💳 *Paid by:* {payer} 💳\n\n"
+
+    # Sharing items
+    if sharing_items:
+        response += "🍽️ *Shared Items:* 🍽️\n"
+        for item in sharing_items:
+            participants = item['participants']
+            amount = item['amount']
+            if participants == ['all']:
+                response += f"  • Everyone (including {payer}): ${amount:.2f}\n"
+            else:
+                response += f"  • {', '.join(participants)}: ${amount:.2f}\n"
+        response += "\n"
+
+    # Individual expenses
+    if individual_expenses:
+        response += "👤 *Individual Expenses:* 👤\n"
+        for name, amount in individual_expenses.items():
+            response += f"  • {name}: ${amount:.2f}\n"
+        response += "\n"
+
+    # What each person owes
+    response += "💸 *What Each Person Owes:* 💸\n"
+    for name, details in breakdown.items():
+        response += "\n"
+        response += f"👤 *{name}:* 👤\n"
+        if details['individual'] > 0:
+            response += f"  Individual: ${details['individual']:.2f}\n"
+        if details['sharing'] > 0:
+            response += f"  Shared: ${details['sharing']:.2f}\n"
+        response += f"  Subtotal: ${details['subtotal']:.2f}\n"
+        if not no_surcharges:
+            response += f"  Service Charge: ${details['service_charge']:.2f}\n"
+            response += f"  GST: ${details['gst']:.2f}\n"
+        response += f"  *Total: ${details['total']:.2f}*\n"
+
+        response += f"{name} owes ${details['total']:.2f} to {payer}. \n"
+
+    response += "\n---"
+    response += "\n🤖 Powered by Lilith 🤖"
     return response
