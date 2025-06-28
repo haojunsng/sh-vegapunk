@@ -90,7 +90,7 @@ def format_split_result(result):
     
     # Quick settlement summary
     if settlements:
-        response += "🔄 <b>SETTLEMENT PLAN</b> ({len(settlements)} transactions) 🔄\n"
+        response += f"🔄 <b>SETTLEMENT PLAN</b> ({len(settlements)} transactions) 🔄\n"
         for i, settlement in enumerate(settlements, 1):
             response += f"{i}. 💸 <b>{settlement['from']}</b> → <b>{settlement['to']}</b>: ${settlement['amount']:.2f} 💸\n"
     else:
