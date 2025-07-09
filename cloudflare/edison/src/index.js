@@ -15,25 +15,15 @@ app.post('/webhook', async (c) => {
 	const chatId = body?.message?.chat?.id;
 
 	if (text === '/start' || text === '/help') {
-		const welcomeMessage = `Hello! I'm Edison! Send me the name of any Singapore town and I'll tell you the latest weather.`;
+		const welcomeMessage = `🤖 Hello! I'm Edison, one of Vegapunk's satellites! Send me the name of any Singapore town and I'll tell you the latest weather! 🌦`;
 		await sendTelegramMessage(c, chatId, welcomeMessage)
 
 		return c.text('Welcome message sent', 200);
 	}
 
-	if (!text) {
-		await sendTelegramMessage(c, chatId, "Please send a Singapore town name or use /help.")
-		return c.text("Invalid input", 400);
-	}
-
-	const town = body?.message?.text?.trim()
-	if (!town) {
-		return c.text('Invalid request: Please send a town!', 400);
-	}
-
 	// Forward the request to sh-nami API
 	const apiKey = c.env.API_KEY
-	const encodedTown = encodeURIComponent(town)
+	const encodedTown = encodeURIComponent(text)
 	const completeApiUrl = `${c.env.API_URL}?town=${encodedTown}`
 	
 	let weatherData
@@ -53,7 +43,7 @@ app.post('/webhook', async (c) => {
 		weatherData = await resp.json()
 	} catch (err) {
 		await sendTelegramMessage(c, chatId, `Apologies. I could not fetch the weather for "${text}".`)
-		return c.text('Weather fetch failed', 500)
+		return c.text('Weather fetch failed', 200)
 	}
 
 	const message = formatWeatherMessage(weatherData)
