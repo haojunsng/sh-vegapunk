@@ -24,8 +24,14 @@ export async function sendTelegramMessage(c, chatId, text) {
 export function formatWeatherMessage(data) {
 	const tomorrow = data.tomorrow_io
 	const google = data.google
+	const town = data.town
 
-	return `📍 Weather for ${data.town}:
+	const capitalised_town = town.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+	const current_datetime = new Date().toLocaleString("en-SG", { timeZone: "Asia/Singapore" })
+
+	return `📍 Weather for ${capitalised_town}:
+
+${current_datetime}
 
 🌦 Tomorrow.io:
 • Rain Intensity: ${tomorrow.rainIntensity}
@@ -38,5 +44,7 @@ export function formatWeatherMessage(data) {
 • Humidity: ${google.humidity}%
 • Precipitation: ${google.precipitationProbability}%
 • Temperature: ${google.temperature}°C
+
+🤖 Powered by Edison 🤖
 `
 }

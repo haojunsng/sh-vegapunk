@@ -15,7 +15,7 @@ app.post('/webhook', async (c) => {
 	const chatId = body?.message?.chat?.id;
 
 	if (text === '/start' || text === '/help') {
-		const welcomeMessage = `Hello! I'm Edison! Send me the name of any Singapore town and I'll tell you the latest weather.`;
+		const welcomeMessage = `🤖 Hello! I'm Edison, one of Vegapunk's satellites! Send me the name of any Singapore town and I'll tell you the latest weather! 🌦`;
 		await sendTelegramMessage(c, chatId, welcomeMessage)
 
 		return c.text('Welcome message sent', 200);
@@ -23,7 +23,7 @@ app.post('/webhook', async (c) => {
 
 	// Forward the request to sh-nami API
 	const apiKey = c.env.API_KEY
-	const encodedTown = encodeURIComponent(town)
+	const encodedTown = encodeURIComponent(text)
 	const completeApiUrl = `${c.env.API_URL}?town=${encodedTown}`
 	
 	let weatherData
