@@ -70,7 +70,7 @@ resource "aws_lambda_function" "tsrc_poll_bot" {
 resource "aws_cloudwatch_event_rule" "weekly_schedule" {
   name                = "2000hrs-sunday-weekly"
   description         = "Every Sunday at 2000hrs"
-  schedule_expression = "cron(0 12 ? * SUN *)"  # Sunday 8 PM SGT
+  schedule_expression = "cron(0 6 ? * SUN *)"  # Sunday 2 PM SGT
 }
 
 # Permission for EventBridge to invoke Lambda
