@@ -18,6 +18,7 @@ def lambda_handler(event, context):
     message_text = "Please select your availability for the upcoming week's runs."
 
     options = [
+        "✅ Monday Evening",
         "✅ Wednesday Evening",
         "✅ Saturday Morning",
         "❌ None"
