@@ -62,10 +62,10 @@
 ### ✅ EDISON! (WEATHER APP)
 
 <div align="center">
-  <img width="30%" alt="Telegram Bot Demo" src="media/edison-demo.gif" />
+  <img width="30%" alt="Telegram Bot Demo" src="media/edison-demo_2.gif" />
 </div>
 
-`EDISON` lets you know what the current weather is like over at a specified location! **Simply send him a place/town/location in Singapore, and it will automatically check for you using popular weather APIs like `Tomorrow.io` or `Google Weather API`!** If the location you specified isn't supported, please let me know!
+`EDISON` lets you know what the current weather is like over at a specified location! **Simply send him a place/town/location in Singapore, and it will automatically check for you using popular weather APIs like `Tomorrow.io`, `Google Weather API` and `OpenMeteo API`!** If the location you specified isn't supported, please let me know!
 
 #### Architecture
 <div align="center">
