@@ -66,7 +66,7 @@ ${current_datetime}
 
 🌦 OpenMeteo Weather:
 • ${weatherCodeMap[openmeteo.weathercode]}
-• Wind Speed: ${openmeteo.windspeed}%
+• Wind Speed: ${openmeteo.windspeed}km/h
 • Temperature: ${openmeteo.temperature}°C
 
 🤖 Powered by Edison 🤖
