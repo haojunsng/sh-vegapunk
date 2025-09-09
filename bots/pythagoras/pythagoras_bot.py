@@ -2,7 +2,7 @@ import os
 import json
 import urllib.request
 import urllib.parse
-from datetime import datetime
+from datetime import datetime, timedelta
 
 FXRATESAPI_KEY = os.environ.get("FXRATESAPI_KEY")
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
@@ -18,7 +18,7 @@ def lambda_handler(event, context):
 
     rate = data["rates"]["JPY"]
 
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = (datetime.now() + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
     message = f"⏰ Daily FX Update\n📅 {now}\n\n💵 1 SGD = {rate:.2f} JPY"
 
     # Send to Pythagoras Bot
