@@ -8,7 +8,7 @@ FXRATESAPI_KEY = os.environ.get("FXRATESAPI_KEY")
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
-def lambda_handler():
+def lambda_handler(event, context):
     # Build fxratesapi URL
     url = f"https://api.fxratesapi.com/latest?base=SGD&symbols=JPY&api_key={FXRATESAPI_KEY}"
 
