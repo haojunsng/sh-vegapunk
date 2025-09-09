@@ -19,7 +19,7 @@ def lambda_handler():
     rate = data["rates"]["JPY"]
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    message = f"⏰ Hourly FX Update\n📅 {now}\n\n💵 1 SGD = {rate:.2f} JPY"
+    message = f"⏰ Daily FX Update\n📅 {now}\n\n💵 1 SGD = {rate:.2f} JPY"
 
     # Send to Pythagoras Bot
     telegram_url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
