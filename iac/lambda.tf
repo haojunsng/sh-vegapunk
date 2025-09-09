@@ -130,3 +130,25 @@ resource "aws_lambda_function" "pythagoras" {
     }
   }
 }
+
+resource "aws_cloudwatch_event_rule" "daily_fx" {
+  name                = "daily-fx"
+  description         = "Everyday at 10am SGT"
+  schedule_expression = "cron(0 2 * * ? *)"  # Everyday 10am SGT
+}
+
+# Permission for EventBridge to invoke Lambda
+resource "aws_lambda_permission" "allow_eventbridge_pythagoras" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.pythagoras.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.daily_fx.arn
+}
+
+# EventBridge target (link rule to Lambda)
+resource "aws_cloudwatch_event_target" "lambda_target_pythagoras" {
+  rule      = aws_cloudwatch_event_rule.daily_fx.name
+  target_id = "pythagoras-lambda"
+  arn       = aws_lambda_function.pythagoras.arn
+}
