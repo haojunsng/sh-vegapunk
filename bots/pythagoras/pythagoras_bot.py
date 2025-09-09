@@ -18,7 +18,7 @@ def lambda_handler(event, context):
 
     rate = data["rates"]["JPY"]
 
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = (datetime.now() + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
     message = f"⏰ Daily FX Update\n📅 {now}\n\n💵 1 SGD = {rate:.2f} JPY"
 
     # Send to Pythagoras Bot
