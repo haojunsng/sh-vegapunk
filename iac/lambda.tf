@@ -108,3 +108,25 @@ resource "aws_lambda_function" "weaponsLeft" {
     }
   }
 }
+
+# pythagoras bot
+resource "aws_lambda_function" "pythagoras" {
+  function_name = "pythagoras"
+  role          = aws_iam_role.strongRight_lambda_role.arn
+  handler       = "pythagoras_bot.lambda_handler"
+  runtime       = "python3.13"
+  timeout       = 30
+
+  s3_bucket = aws_s3_bucket.data_robot_bucket.bucket
+  s3_key    = "lambda/pythagoras/lambda_function.zip"
+
+  source_code_hash = data.aws_s3_object.pythagoras_zip.etag
+
+  environment {
+    variables = {
+      FXRATESAPI_KEY = var.fxratesapi_key
+      TELEGRAM_TOKEN = var.telegram_token
+      TELEGRAM_CHAT_ID = var.telegram_chat_id
+    }
+  }
+}
