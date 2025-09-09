@@ -14,3 +14,9 @@ data "aws_s3_object" "weapons_left_zip" {
   bucket = aws_s3_bucket.data_robot_bucket.bucket
   key    = "lambda/weapons-left/lambda_function.zip"
 }
+
+# Data source to get S3 object ETag for pythagoras
+data "aws_s3_object" "pythagoras_zip" {
+  bucket = aws_s3_bucket.data_robot_bucket.bucket
+  key    = "lambda/pythagoras/lambda_function.zip"
+}
